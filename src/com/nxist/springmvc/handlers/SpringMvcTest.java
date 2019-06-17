@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SpringMvcTest {
     private static final String SUCCESS = "success";
 
+    public String testRequestParam(){
+
+        return SUCCESS;
+    }
+
     /**
      *Rest风格URL
      * 以CRUD为例
