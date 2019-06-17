@@ -12,5 +12,17 @@
 </head>
 <body>
 <h1>success page</h1>
+time:${requestScope.time}
+<br><br>
+names:${requestScope.names}
+<br><br>
+request user:${requestScope.user}
+<br><br>
+session user:${sessionScope.user}
+
+<br><br>
+request college:${requestScope.college}
+<br><br>
+session college:${sessionScope.college}
 </body>
 </html>
