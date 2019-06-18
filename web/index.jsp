@@ -11,6 +11,9 @@
     <title>主页</title>
 </head>
 
+<a href="emps">List All Employees</a>
+<br><br>
+
 <a href="springmvc/testRedirect">Test Redirect</a>
 <br><br>
 
