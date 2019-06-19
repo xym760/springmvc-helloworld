@@ -1,5 +1,8 @@
 .idea
 lib
+#排除out文件夹
 out
-#过滤所有以.class结尾的文件
+#排除springmvc-helloworld.iml文件
+springmvc-helloworld.iml
+#排除所有以.class结尾的文件
 *.class

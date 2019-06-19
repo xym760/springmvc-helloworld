@@ -1,5 +1,7 @@
 package com.nxist.springmvc.crud.entities;
 
+import java.util.Date;
+
 public class Employee {
     private Integer id;
     private String lastName;
@@ -7,6 +9,7 @@ public class Employee {
     //1 male，0 female
     private Integer gender;
     private Department department;
+    private Date brith;
 
     public Employee() {
     }
@@ -59,6 +62,14 @@ public class Employee {
         this.department = department;
     }
 
+    public Date getBrith() {
+        return brith;
+    }
+
+    public void setBrith(Date brith) {
+        this.brith = brith;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -67,6 +78,7 @@ public class Employee {
                 ", email='" + email + '\'' +
                 ", gender=" + gender +
                 ", department=" + department +
+                ", brith=" + brith +
                 '}';
     }
 }

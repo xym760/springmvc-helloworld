@@ -10,8 +10,29 @@
 <html>
 <head>
     <title>Title</title>
+    <%--
+    SpringMVC处理静态资源：
+    1.为什么会有这样的问题：
+    优雅的REST风格的资源URL不希望带.html或.do等后缀，若将DispatcherServlet请求映射配置为/,
+    则SpringMVC将捕获WEB容器的所有请求,包括静态资源的请求,SpringMVC会将他们当成一个普通请求处理,因找不到对应处理器将导致错误。
+    2.解决：
+    在springmvc的配置文件中配置<mvc:default-servlet-handler/>
+    --%>
+    <script src="scripts/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function () {
+            $(".delete").click(function () {
+                var href=$(this).attr("href");
+                $("form").attr("action",href).submit();
+                return false;
+            });
+        })
+    </script>
 </head>
 <body>
+<form action="" method="post">
+    <input type="hidden" name="_method" value="delete">
+</form>
 
 <c:if test="${empty requestScope.employees}">
     没有任何员工信息。
@@ -35,12 +56,15 @@
                 <td>${emp.email}</td>
                 <td>${emp.gender == 0 ? 'Female' : 'Male'}</td>
                 <td>${emp.department.departmentName}</td>
-                <td><a href="">Edit</a></td>
-                <td><a href="">Delete</a></td>
+                <td><a href="emp/${emp.id}">Edit</a></td>
+                <td><a class="delete" href="emp/${emp.id}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
 </c:if>
+
+<br><br>
+<a href="emp">Add new Employee</a>
 
 </body>
 </html>
