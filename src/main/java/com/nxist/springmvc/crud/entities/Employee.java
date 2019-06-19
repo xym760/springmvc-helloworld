@@ -1,15 +1,27 @@
 package com.nxist.springmvc.crud.entities;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Past;
 import java.util.Date;
 
 public class Employee {
     private Integer id;
+    @NotEmpty
     private String lastName;
+    @Email
     private String email;
     //1 male，0 female
     private Integer gender;
     private Department department;
-    private Date brith;
+    @Past
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date birth;
+    @NumberFormat(pattern = "#,###,###.#")
+    private Float salary;
 
     public Employee() {
     }
@@ -62,12 +74,20 @@ public class Employee {
         this.department = department;
     }
 
-    public Date getBrith() {
-        return brith;
+    public Date getBirth() {
+        return birth;
     }
 
-    public void setBrith(Date brith) {
-        this.brith = brith;
+    public void setBirth(Date birth) {
+        this.birth = birth;
+    }
+
+    public Float getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Float salary) {
+        this.salary = salary;
     }
 
     @Override
@@ -78,7 +98,8 @@ public class Employee {
                 ", email='" + email + '\'' +
                 ", gender=" + gender +
                 ", department=" + department +
-                ", brith=" + brith +
+                ", birth=" + birth +
+                ", salary=" + salary +
                 '}';
     }
 }

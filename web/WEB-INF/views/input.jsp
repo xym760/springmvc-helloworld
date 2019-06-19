@@ -14,6 +14,12 @@
     <title>Title</title>
 </head>
 <body>
+<form action="testConversionServiceConverer" method="post">
+    <%--lastname-email-gender-department.id 例如：GG-gg@nxist.com-0-105--%>
+    Employee:<input type="text" name="employee">
+    <input type="submit" value="Submit">
+</form>
+<br><br>
 <%--
 1.为什么使用form标签呢？
 可以更快速的开发出表单页面，而且可以更方便的进行表单值的回显
@@ -21,7 +27,12 @@
 若没有指定该属性，则默认从 request 域中查找 command 的表单的 bean 如果该属性也不存在，那么，则会发生错误。
 --%>
 <%--此处action写绝对路径：${pageContext.request.contextPath}/，不然报错爽死你--%>
+<br><br>
 <form:form action="${pageContext.request.contextPath}/emp" method="post" modelAttribute="employee">
+
+    <form:errors path="*"></form:errors>
+    <br>
+
     <c:if test="${employee.id==null}">
         <%--path属性对应html表单标签的name属性值--%>
         LastName:<form:input path="lastName"></form:input>
@@ -52,9 +63,21 @@
     1.数据类型转换
     2.数据类型格式化
     3.数据校验
+    1).如何校验？注解？
+    ①.使用JSR 303验证标准
+    ②.加入hibernate validator验证框架的jar包
+    ③.在SpringMVC配置文件中添加<mvc:annotation-drive/>
+    ④.需要在bena的属性上添加对应注解
+    ⑤.在目标方法bean类型的前面添加@Valid注解
+    2).验证出错转向到哪一个页面?
+    3).错误消息？如何显示，如何把错误消息进行国际化
     --%>
-    <%--Brith:<form:input path="birth"></form:input>--%>
-    <%--<br>--%>
+    Brith:<form:input path="birth"></form:input>
+    <form:errors path="birth"></form:errors>
+    <br>
+    Salary:<form:input path="Salary"></form:input>
+    <form:errors path="salary"></form:errors>
+    <br>
     <input type="submit" value="Submit">
 </form:form>
 </body>

@@ -6,8 +6,12 @@ import com.nxist.springmvc.crud.entities.Department;
 import com.nxist.springmvc.crud.entities.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
@@ -58,7 +62,17 @@ public class EmployeeHandler {
     }
 
     @RequestMapping(value = "/emp", method = RequestMethod.POST)
-    public String save(Employee employee) {
+    public String save(@Valid Employee employee, BindingResult result,Map<String,Object> map) {
+        System.out.println("save："+employee);
+        if(result.getErrorCount()>0){
+            System.out.println("occur error!");
+            for(FieldError error:result.getFieldErrors()){
+                System.out.println(error.getField()+":"+error.getDefaultMessage());
+            }
+            //若验证出错，则转向定制的页面
+            map.put("departments", departmentDao.getDepartments());
+            return "input";
+        }
         employeeDao.save(employee);
         return "redirect:/emps";
     }
@@ -75,4 +89,13 @@ public class EmployeeHandler {
         map.put("employees", employeeDao.getAll());
         return "list";
     }
+
+    /**
+     * 使lastName表单值不绑定到属性上
+     * @param binder
+     */
+//    @InitBinder
+//    public void initBinder(WebDataBinder binder){
+//        binder.setDisallowedFields("lastName");
+//    }
 }
