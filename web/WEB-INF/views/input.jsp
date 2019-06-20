@@ -36,6 +36,7 @@
     <c:if test="${employee.id==null}">
         <%--path属性对应html表单标签的name属性值--%>
         LastName:<form:input path="lastName"></form:input>
+        <form:errors path="lastName"></form:errors>
     </c:if>
     <c:if test="${employee.id!=null}">
         <form:hidden path="id"></form:hidden>
@@ -45,6 +46,7 @@
     </c:if>
     <br>
     Email:<form:input path="email"></form:input>
+    <form:errors path="email"></form:errors>
     <br>
     <%
         Map<String, String> genders = new HashMap<>();

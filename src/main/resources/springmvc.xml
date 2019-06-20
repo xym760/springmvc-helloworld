@@ -25,9 +25,19 @@
         <property name="basename" value="i18n"></property>
     </bean>
 
+    <!--配置SessionLocalResolver-->
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"></bean>
+
+    <!--配置LocaleChangeInterceptor-->
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"></bean>
+    </mvc:interceptors>
+
     <!--配置直接转发的页面-->
     <!--可以直接响应转发的页面，而无需再经过Handler的方法-->
     <mvc:view-controller path="/success" view-name="success"></mvc:view-controller>
+    <!--<mvc:view-controller path="/i18n" view-name="i18n"></mvc:view-controller>-->
+    <mvc:view-controller path="/i18n2" view-name="i18n2"></mvc:view-controller>
 
     <!--在实际开发中通常都需要配置mvc:annotation-driven标签-->
     <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
