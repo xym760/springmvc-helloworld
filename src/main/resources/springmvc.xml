@@ -5,6 +5,16 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+    <!--
+    需要进行Spring整合SpringMVC吗？
+    还是否需要再加入Spring的IOC容器？
+    是否需要在web.xml文件中配置启动Spring IOC容器的ContextLoaderListener ?
+
+    1.需要：通常情况下，类似于数据源，事务，整合其他框架都是放在Spring的配置文件中（而不是放在SpringMVC的配置文件中）。
+    实际上放入Spring配置文件对应的IOC容器中的还有Service和Dao.
+    2.不需要：都放在SpringMVC的配置文件中。也可以分多个Spring的配置文件，然后使用import节点导入其他的配置文件
+    -->
+
     <!--配置自动扫描的包-->
     <context:component-scan base-package="com.nxist.springmvc"></context:component-scan>
 
@@ -72,5 +82,15 @@
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="defaultEncoding" value="UTF-8"></property>
         <property name="maxUploadSize" value="1024000"></property>
+    </bean>
+
+    <!--配置SimpleMappingExceptionResolver来映射异常，配置当出现哪种异常的时候跳转到哪个页面-->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionAttribute" value="ex"></property>
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.ArrayIndexOutOfBoundsException">error</prop>
+            </props>
+        </property>
     </bean>
 </beans>
