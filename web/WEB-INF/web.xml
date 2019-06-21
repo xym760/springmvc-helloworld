@@ -13,14 +13,17 @@
         <filter-name>HiddenHttpMethodFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    <!--配置spring mvc配置文件的位置和名称，context-param在所有的servlet中都能使用，init-param只能在当前的servlet中使用-->
+
+    <!--context-param在所有的servlet中都能使用，init-param只能在当前的servlet中使用-->
+    <!--配置启动Spring IOC容器的Listener-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/applicationContext.xml</param-value>
+        <param-value>/WEB-INF/beans.xml</param-value>
     </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+
     <!--配置DispatcherServlet-->
     <servlet>
         <servlet-name>dispatcher</servlet-name>
